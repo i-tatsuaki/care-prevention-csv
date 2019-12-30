@@ -1,17 +1,17 @@
-package com.tatsuaki.carepreventioncsv.model.domain.CarePreventionCsvColumn
+package com.tatsuaki.carepreventioncsv.model.domain.csvcolumn
 
 import java.util.Arrays
 
 import java.util.stream.Collectors.toList
 
-class PaymentLimitDivision(private val paymentLimitDivision: String) {
+class CountUnit(private val countUnit: String) {
 
     val formatErrorMessage: String
         get() {
             val errorMessageBuilder = StringBuilder()
 
             if (!validateCodeFormat()) {
-                errorMessageBuilder.append("存在しない支給限度額対象区分コードです.")
+                errorMessageBuilder.append("存在しない算定単位コードです.")
             }
 
             return errorMessageBuilder.toString()
@@ -19,7 +19,10 @@ class PaymentLimitDivision(private val paymentLimitDivision: String) {
 
     enum class Code private constructor(val code: String, val japanese: String) {
 
-        TARGET("3", "対象");
+        TIMES("01", "回数単位"),
+        DAILY("02", "日単位"),
+        MONTHLY("03", "月単位"),
+        WEEKLY("05", "週単位");
 
 
         companion object {
@@ -47,18 +50,18 @@ class PaymentLimitDivision(private val paymentLimitDivision: String) {
         }
     }
 
-    fun getPaymentLimitDivision(): String {
-        return paymentLimitDivision + getJapanese(paymentLimitDivision)
+    fun getCountUnit(): String {
+        return countUnit + getJapanese(countUnit)
     }
 
-    private fun getJapanese(paymentLimitDivision: String): String {
-        return if (validateCodeFormat() && !paymentLimitDivision.isEmpty())
-            "(" + PaymentLimitDivision.Code.getJapanese(paymentLimitDivision) + ")"
+    private fun getJapanese(countUnit: String): String {
+        return if (validateCodeFormat())
+            "(" + Code.getJapanese(countUnit) + ")"
         else
             ""
     }
 
     private fun validateCodeFormat(): Boolean {
-        return paymentLimitDivision.isEmpty() || PaymentLimitDivision.Code.contains(paymentLimitDivision)
+        return Code.contains(countUnit)
     }
 }

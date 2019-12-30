@@ -1,38 +1,36 @@
-package com.tatsuaki.carepreventioncsv.model.domain.CarePreventionCsvColumn
+package com.tatsuaki.carepreventioncsv.model.domain.csvcolumn
 
-import java.util.regex.Matcher
 import java.util.regex.Pattern
 
-class UnitNumber(val unitNumber: String) {
+class InsureNumber(val insureNumber: String) {
 
     val formatErrorMessage: String
         get() {
             val errorMessageBuilder = StringBuilder()
 
             if (!validateCharcter()) {
-                errorMessageBuilder.append("単位数表現が誤っています.")
+                errorMessageBuilder.append("数字0~9以外が含まれています.")
             }
 
             if (!validateLength()) {
-                errorMessageBuilder.append("最大桁5桁を超えています.")
+                errorMessageBuilder.append("6桁ではありません.")
             }
 
             return errorMessageBuilder.toString()
         }
 
     private fun validateCharcter(): Boolean {
-        val regex = "[0-9]*|-[0-9]*"
+        val regex = "[0-9]*"
         val p = Pattern.compile(regex)
-        val m = p.matcher(unitNumber)
+        val m = p.matcher(insureNumber)
         return m.matches()
     }
 
     private fun validateLength(): Boolean {
-        return unitNumber.length <= LENGTH
+        return insureNumber.length == LENGTH
     }
 
     companion object {
-        private val LENGTH = 5
+        private val LENGTH = 6
     }
-
 }

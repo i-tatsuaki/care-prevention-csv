@@ -1,9 +1,8 @@
-package com.tatsuaki.carepreventioncsv.model.domain.CarePreventionCsvColumn
+package com.tatsuaki.carepreventioncsv.model.domain.csvcolumn
 
-import java.util.regex.Matcher
 import java.util.regex.Pattern
 
-class EndDate(val endDate: String) {
+class CreatedDate(val createdDate: String) {
 
     val formatErrorMessage: String
         get() {
@@ -14,7 +13,7 @@ class EndDate(val endDate: String) {
             }
 
             if (!validateLength()) {
-                errorMessageBuilder.append("6桁ではありません.")
+                errorMessageBuilder.append("8桁ではありません.")
             }
 
             return errorMessageBuilder.toString()
@@ -23,16 +22,16 @@ class EndDate(val endDate: String) {
     private fun validateCharcter(): Boolean {
         val regex = "[0-9]*"
         val p = Pattern.compile(regex)
-        val m = p.matcher(endDate)
+        val m = p.matcher(createdDate)
         return m.matches()
     }
 
     private fun validateLength(): Boolean {
-        return endDate.length == LENGTH
+        return createdDate.length == LENGTH
     }
 
     companion object {
-        private val LENGTH = 6
+        private val LENGTH = 8
     }
 
 }

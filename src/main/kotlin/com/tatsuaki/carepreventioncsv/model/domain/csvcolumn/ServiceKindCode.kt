@@ -1,4 +1,4 @@
-package com.tatsuaki.carepreventioncsv.model.domain.CarePreventionCsvColumn
+package com.tatsuaki.carepreventioncsv.model.domain.csvcolumn
 
 class ServiceKindCode(val serviceKindCode: String) {
 

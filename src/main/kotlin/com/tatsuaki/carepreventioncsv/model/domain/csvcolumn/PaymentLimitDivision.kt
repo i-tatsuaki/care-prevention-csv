@@ -1,27 +1,25 @@
-package com.tatsuaki.carepreventioncsv.model.domain.CarePreventionCsvColumn
+package com.tatsuaki.carepreventioncsv.model.domain.csvcolumn
 
 import java.util.Arrays
 
 import java.util.stream.Collectors.toList
 
-class ImplementationDivisionForSupportNeed1(private val implementationDivisionForSupportNeed1: String) {
+class PaymentLimitDivision(private val paymentLimitDivision: String) {
 
     val formatErrorMessage: String
         get() {
             val errorMessageBuilder = StringBuilder()
 
             if (!validateCodeFormat()) {
-                errorMessageBuilder.append("存在しない要支援１受給者実施区分コードです.")
+                errorMessageBuilder.append("存在しない支給限度額対象区分コードです.")
             }
 
             return errorMessageBuilder.toString()
         }
 
-
     enum class Code private constructor(val code: String, val japanese: String) {
 
-        TARGET("1", "実施不可"),
-        NON_TARGET("2", "実施可");
+        TARGET("3", "対象");
 
 
         companion object {
@@ -49,18 +47,18 @@ class ImplementationDivisionForSupportNeed1(private val implementationDivisionFo
         }
     }
 
-    fun getImplementationDivisionForSupportNeed1(): String {
-        return implementationDivisionForSupportNeed1 + getJapanese(implementationDivisionForSupportNeed1)
+    fun getPaymentLimitDivision(): String {
+        return paymentLimitDivision + getJapanese(paymentLimitDivision)
     }
 
-    private fun getJapanese(implementationDivisionForSupportNeed1: String): String {
-        return if (validateCodeFormat())
-            "(" + ImplementationDivisionForSupportNeed1.Code.getJapanese(implementationDivisionForSupportNeed1) + ")"
+    private fun getJapanese(paymentLimitDivision: String): String {
+        return if (validateCodeFormat() && !paymentLimitDivision.isEmpty())
+            "(" + PaymentLimitDivision.Code.getJapanese(paymentLimitDivision) + ")"
         else
             ""
     }
 
     private fun validateCodeFormat(): Boolean {
-        return ImplementationDivisionForSupportNeed1.Code.contains(implementationDivisionForSupportNeed1)
+        return paymentLimitDivision.isEmpty() || PaymentLimitDivision.Code.contains(paymentLimitDivision)
     }
 }

@@ -1,6 +1,6 @@
 package com.tatsuaki.carepreventioncsv.model.domain
 
-import com.tatsuaki.carepreventioncsv.model.domain.CarePreventionCsvColumn.*
+import com.tatsuaki.carepreventioncsv.model.domain.csvcolumn.*
 
 import java.util.Arrays
 
@@ -256,6 +256,16 @@ class CarePreventionCsvItem private constructor(csvLine: String) {
 
     fun getCreatedDate(): String {
         return createdDate!!.createdDate
+    }
+
+    override fun equals(other: Any?): Boolean {
+
+        // TODO 実装する
+        if (other is CarePreventionCsvItem) {
+            return this.insureNumber!!.equals(other.insureNumber)
+        }
+
+        return false
     }
 
     companion object {

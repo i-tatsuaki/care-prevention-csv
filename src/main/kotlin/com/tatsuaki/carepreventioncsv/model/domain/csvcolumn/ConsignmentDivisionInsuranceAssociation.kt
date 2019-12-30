@@ -1,28 +1,29 @@
-package com.tatsuaki.carepreventioncsv.model.domain.CarePreventionCsvColumn
+package com.tatsuaki.carepreventioncsv.model.domain.csvcolumn
 
 import java.util.Arrays
 
 import java.util.stream.Collectors.toList
 
-class ImplementationDivisionForSupportNeed2(val implementationDivisionForSupportNeed2: String) {
+/**
+ * 事業対象者実施区分コード
+ */
+class ConsignmentDivisionInsuranceAssociation(private val consignmentDivisionInsuranceAssociation: String) {
 
     val formatErrorMessage: String
         get() {
             val errorMessageBuilder = StringBuilder()
 
             if (!validateCodeFormat()) {
-                errorMessageBuilder.append("存在しない要支援２受給者実施区分コードです.")
+                errorMessageBuilder.append("存在しない事業対象者実施区分コードです.")
             }
 
             return errorMessageBuilder.toString()
         }
 
-
     enum class Code private constructor(val code: String, val japanese: String) {
 
-        TARGET("1", "実施不可"),
-        NON_TARGET("2", "実施可");
-
+        TARGET("1", "委託する"),
+        NON_TARGET("2", "委託しない");
 
         companion object {
 
@@ -49,14 +50,18 @@ class ImplementationDivisionForSupportNeed2(val implementationDivisionForSupport
         }
     }
 
-    private fun getJapanese(implementationDivisionForSupportNeed2: String): String {
+    fun getConsignmentDivisionInsuranceAssociation(): String {
+        return consignmentDivisionInsuranceAssociation + getJapanese(consignmentDivisionInsuranceAssociation)
+    }
+
+    private fun getJapanese(consignmentDivisionInsuranceAssociation: String): String {
         return if (validateCodeFormat())
-            "(" + ImplementationDivisionForSupportNeed2.Code.getJapanese(implementationDivisionForSupportNeed2) + ")"
+            "(" + ConsignmentDivisionInsuranceAssociation.Code.getJapanese(consignmentDivisionInsuranceAssociation) + ")"
         else
             ""
     }
 
     private fun validateCodeFormat(): Boolean {
-        return ImplementationDivisionForSupportNeed2.Code.contains(implementationDivisionForSupportNeed2)
+        return ConsignmentDivisionInsuranceAssociation.Code.contains(consignmentDivisionInsuranceAssociation)
     }
 }

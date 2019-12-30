@@ -1,28 +1,27 @@
-package com.tatsuaki.carepreventioncsv.model.domain.CarePreventionCsvColumn
+package com.tatsuaki.carepreventioncsv.model.domain.csvcolumn
 
 import java.util.Arrays
 
 import java.util.stream.Collectors.toList
 
-class CountUnit(private val countUnit: String) {
+class ImplementationDivisionForSupportNeed2(val implementationDivisionForSupportNeed2: String) {
 
     val formatErrorMessage: String
         get() {
             val errorMessageBuilder = StringBuilder()
 
             if (!validateCodeFormat()) {
-                errorMessageBuilder.append("存在しない算定単位コードです.")
+                errorMessageBuilder.append("存在しない要支援２受給者実施区分コードです.")
             }
 
             return errorMessageBuilder.toString()
         }
 
+
     enum class Code private constructor(val code: String, val japanese: String) {
 
-        TIMES("01", "回数単位"),
-        DAILY("02", "日単位"),
-        MONTHLY("03", "月単位"),
-        WEEKLY("05", "週単位");
+        TARGET("1", "実施不可"),
+        NON_TARGET("2", "実施可");
 
 
         companion object {
@@ -50,18 +49,14 @@ class CountUnit(private val countUnit: String) {
         }
     }
 
-    fun getCountUnit(): String {
-        return countUnit + getJapanese(countUnit)
-    }
-
-    private fun getJapanese(countUnit: String): String {
+    private fun getJapanese(implementationDivisionForSupportNeed2: String): String {
         return if (validateCodeFormat())
-            "(" + Code.getJapanese(countUnit) + ")"
+            "(" + ImplementationDivisionForSupportNeed2.Code.getJapanese(implementationDivisionForSupportNeed2) + ")"
         else
             ""
     }
 
     private fun validateCodeFormat(): Boolean {
-        return Code.contains(countUnit)
+        return ImplementationDivisionForSupportNeed2.Code.contains(implementationDivisionForSupportNeed2)
     }
 }

@@ -1,26 +1,27 @@
-package com.tatsuaki.carepreventioncsv.model.domain.CarePreventionCsvColumn
+package com.tatsuaki.carepreventioncsv.model.domain.csvcolumn
 
 import java.util.Arrays
 
 import java.util.stream.Collectors.toList
 
-class ConsignmentDivisionInsuranceAssociation(private val consignmentDivisionInsuranceAssociation: String) {
+class ImplementationDivisionForSupportNeed1(private val implementationDivisionForSupportNeed1: String) {
 
     val formatErrorMessage: String
         get() {
             val errorMessageBuilder = StringBuilder()
 
             if (!validateCodeFormat()) {
-                errorMessageBuilder.append("存在しない事業対象者実施区分コードです.")
+                errorMessageBuilder.append("存在しない要支援１受給者実施区分コードです.")
             }
 
             return errorMessageBuilder.toString()
         }
 
+
     enum class Code private constructor(val code: String, val japanese: String) {
 
-        TARGET("1", "委託する"),
-        NON_TARGET("2", "委託しない");
+        TARGET("1", "実施不可"),
+        NON_TARGET("2", "実施可");
 
 
         companion object {
@@ -48,18 +49,18 @@ class ConsignmentDivisionInsuranceAssociation(private val consignmentDivisionIns
         }
     }
 
-    fun getConsignmentDivisionInsuranceAssociation(): String {
-        return consignmentDivisionInsuranceAssociation + getJapanese(consignmentDivisionInsuranceAssociation)
+    fun getImplementationDivisionForSupportNeed1(): String {
+        return implementationDivisionForSupportNeed1 + getJapanese(implementationDivisionForSupportNeed1)
     }
 
-    private fun getJapanese(consignmentDivisionInsuranceAssociation: String): String {
+    private fun getJapanese(implementationDivisionForSupportNeed1: String): String {
         return if (validateCodeFormat())
-            "(" + ConsignmentDivisionInsuranceAssociation.Code.getJapanese(consignmentDivisionInsuranceAssociation) + ")"
+            "(" + ImplementationDivisionForSupportNeed1.Code.getJapanese(implementationDivisionForSupportNeed1) + ")"
         else
             ""
     }
 
     private fun validateCodeFormat(): Boolean {
-        return ConsignmentDivisionInsuranceAssociation.Code.contains(consignmentDivisionInsuranceAssociation)
+        return ImplementationDivisionForSupportNeed1.Code.contains(implementationDivisionForSupportNeed1)
     }
 }
