@@ -36,6 +36,7 @@ class ConsignmentDivisionInsuranceAssociation(private val consignmentDivisionIns
                 return targetCodes.size != 0
             }
 
+            // TODO: 引数をCode型にする
             fun getJapanese(targetCode: String): String {
                 val targetCodes = Arrays.stream(values())
                         .filter { value -> value.code == targetCode }
