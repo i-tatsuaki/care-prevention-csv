@@ -2,29 +2,32 @@ package com.tatsuaki.carepreventioncsv.model.domain
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.MethodSource
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 import org.springframework.mock.web.MockMultipartFile
 import java.nio.charset.Charset
 import java.nio.charset.StandardCharsets
 
-@RunWith(Parameterized::class)
-class CarePreventionCsvInitConfirmEncodeTest(
-        private val encodeType: Charset,
-        private val encodeString: String
-) {
+class CarePreventionCsvInitConfirmEncodeTest {
 
     companion object {
-        @Parameterized.Parameters
+        val csvSample = "131136,A2,1111,201604,201909,訪問型独自サービス㈵　　　　　　　　　　　　　　　　　　　　　　,01168,03,,,3,,,,2,2,2,1,20190910"
+
         @JvmStatic
-        fun data() = listOf(
+        fun parameters_init_confirmEncode() = listOf(
                 arrayOf(Charset.forName("Shift_JIS"), "SHIFT_JIS"),
                 arrayOf(StandardCharsets.UTF_8, "UTF-8")
         )
     }
 
-    @Test
-    fun `init_confirmEncode`() {
+    @ParameterizedTest
+    @MethodSource("parameters_init_confirmEncode")
+    fun `init_confirmEncode`(
+            encodeType: Charset,
+            encodeString: String
+    ) {
         // given
         val file = MockMultipartFile(
                 "data",
@@ -39,13 +42,7 @@ class CarePreventionCsvInitConfirmEncodeTest(
         // then
         assertThat(result.encode).isEqualTo(encodeString)
     }
-}
 
-class CarePreventionCsvTest {
-
-    companion object {
-        val csvSample = "131136,A2,1111,201604,201909,訪問型独自サービス㈵　　　　　　　　　　　　　　　　　　　　　　,01168,03,,,3,,,,2,2,2,1,20190910"
-    }
     @Test
     fun `init_confirmBom_BOMなし`() {
         // given
