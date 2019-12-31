@@ -251,7 +251,7 @@ class CarePreventionCsvItem private constructor(csvLine: String) {
     }
 
     fun getConsignmentDivisionInsuranceAssociation(): String {
-        return consignmentDivisionInsuranceAssociation!!.getConsignmentDivisionInsuranceAssociation()
+        return consignmentDivisionInsuranceAssociation!!.description
     }
 
     fun getCreatedDate(): String {

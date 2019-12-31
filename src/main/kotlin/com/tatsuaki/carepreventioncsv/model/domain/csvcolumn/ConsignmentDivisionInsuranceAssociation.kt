@@ -20,14 +20,19 @@ class ConsignmentDivisionInsuranceAssociation(private val consignmentDivisionIns
             return errorMessageBuilder.toString()
         }
 
-    enum class Code private constructor(val code: String, val japanese: String) {
+    val description: String
+        get() {
+            return consignmentDivisionInsuranceAssociation + getJapanese(consignmentDivisionInsuranceAssociation)
+        }
+
+    private enum class Code constructor(val code: String, val japanese: String) {
 
         TARGET("1", "委託する"),
         NON_TARGET("2", "委託しない");
 
         companion object {
 
-            operator fun contains(targetCode: String): Boolean {
+            fun contains(targetCode: String): Boolean {
                 val targetCodes = Arrays.stream(values())
                         .filter { value -> value.code == targetCode }
                         .limit(1)
@@ -36,33 +41,26 @@ class ConsignmentDivisionInsuranceAssociation(private val consignmentDivisionIns
                 return targetCodes.size != 0
             }
 
-            // TODO: 引数をCode型にする
-            fun getJapanese(targetCode: String): String {
+            fun of(targetCode: String): Code {
                 val targetCodes = Arrays.stream(values())
                         .filter { value -> value.code == targetCode }
                         .limit(1)
-                        .collect(toList())
+                        .findFirst()
+                        .get()
 
-                return if (targetCodes.size == 0) {
-                    ""
-                } else targetCodes[0].japanese
-
+                return targetCodes
             }
         }
     }
 
-    fun getConsignmentDivisionInsuranceAssociation(): String {
-        return consignmentDivisionInsuranceAssociation + getJapanese(consignmentDivisionInsuranceAssociation)
-    }
-
     private fun getJapanese(consignmentDivisionInsuranceAssociation: String): String {
         return if (validateCodeFormat())
-            "(" + ConsignmentDivisionInsuranceAssociation.Code.getJapanese(consignmentDivisionInsuranceAssociation) + ")"
+            "(" + Code.of(consignmentDivisionInsuranceAssociation).japanese + ")"
         else
             ""
     }
 
     private fun validateCodeFormat(): Boolean {
-        return ConsignmentDivisionInsuranceAssociation.Code.contains(consignmentDivisionInsuranceAssociation)
+        return Code.contains(consignmentDivisionInsuranceAssociation)
     }
 }
