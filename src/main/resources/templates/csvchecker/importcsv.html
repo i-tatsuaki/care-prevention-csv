@@ -1,13 +1,42 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<link href="/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
 <head>
     <meta charset="UTF-8">
-    <title>介護 総合事業 CSVチェッカー（入力画面）</title>
+    <title>総合事業CSV確認</title>
 </head>
 <body>
+    <!-- header -->
+    <h1 style="color: #007755;">介護 総合事業 CSV確認</h1>
+
+    <!-- body -->
+    <h2>当サイトの説明</h2>
+    <p>本ページは、介護保険法で定められている「介護予防・日常生活支援総合事業」において、<br>
+        各自治体が提供している介護予防・日常生活支援総合事業単位数表マスタ（csv）をブラウザ上で確認することができるサービスになります。<br>
+        また厚生労働省により定められているフォーマットに準じているかどうかのチェックも行うことができます。</p>
+
+    <h2>csvを確認する</h2>
     <form action="import" th:action="@{/import}" method="post" enctype="multipart/form-data">
-        <input type="file" name="upload_file" /><br />
-        <button type="submit">upload</button>
+        <p>手順１：ファイルを選択する</p>
+        <input type="file" name="upload_file" style="width:300px;height:50px" value="ファイルを選択する"/>
+        <p>手順２：以下の「確認する」ボタンをおす</p>
+        <button type="submit" style="width:100px;height:50px">確認する</button>
     </form>
+
+    <!-- coming soon
+    <h2>仕様の詳細</h2>
+    <p>対応しているエラーの種類<br>
+    </p>
+    <hr>
+    -->
+
+    <h2>免責事項</h2>
+    <p>
+        当サイトのご利用につき、何らかのトラブルや損失・損害等につきましては一切責任を問わないものとします。<br>
+        当サイトでは正しい情報を提供するように努めておりますが、正確性、最新性の有無など、その内容については一切の保証を致しかねます。
+
+    <!-- footer -->
+    <hr>
+    <p class="footer">produced by tatsuaki</p>
 </body>
 </html>

@@ -1,0 +1,49 @@
+body {
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.25;
+}
+
+/* header */
+h2 {
+  padding-left: 10px;
+  border-left-color: #007755;
+  border-left-style: solid;
+  border-left-width: 4px;
+}
+
+/* table */
+table {
+  border-collapse: collapse;
+  margin: 0 auto;
+  padding: 0;
+  color: #007755;
+}
+table tbody tr:hover{
+  background-color: #fffae9;
+}
+table tr {
+  background-color: #fff;
+  padding: .35em;
+  border-bottom: 1px dotted #007755;
+}
+table tr:last-child{
+  border-bottom: 2px solid #007755;
+}
+table th,
+table td {
+  border-style: solid dotted;
+  border-width: 1px;
+  border-color: green;
+  padding: 1em 10px 1em 1em;
+}
+.txt {
+  text-align: left;
+  font-size: .85em;
+}
+
+/* footer */
+.footer {
+  font-size: 50%;
+  color: #777777;
+  text-align: right;
+}
