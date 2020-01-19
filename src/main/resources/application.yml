@@ -1,0 +1,7 @@
+server:
+  port: 8080
+
+security:
+  login:
+    id: user
+    password: password

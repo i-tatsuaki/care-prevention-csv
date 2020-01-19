@@ -1,5 +1,6 @@
 package com.tatsuaki.carepreventioncsv.controller
 
+import com.tatsuaki.carepreventioncsv.config.LoginUserConfig
 import com.tatsuaki.carepreventioncsv.model.domain.CarePreventionCsv
 import com.tatsuaki.carepreventioncsv.model.service.csvchecker.CsvCheckerService
 import org.springframework.beans.factory.annotation.Autowired

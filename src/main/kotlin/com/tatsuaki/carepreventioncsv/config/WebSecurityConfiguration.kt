@@ -1,5 +1,6 @@
 package com.tatsuaki.carepreventioncsv.config
 
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException
 import org.springframework.security.authentication.AuthenticationProvider
@@ -18,8 +19,8 @@ import org.springframework.security.core.AuthenticationException
 @EnableWebSecurity
 open class WebSecurityConfiguration : WebSecurityConfigurerAdapter() {
 
-    private val username0: String = "user"
-    private val password0: String = "password"
+    @Autowired
+    lateinit var loginUserConfig: LoginUserConfig
 
     override fun configure(web: WebSecurity) {
         http.antMatcher("/**") // Basic認証の対象となるパス
@@ -47,7 +48,8 @@ open class WebSecurityConfiguration : WebSecurityConfigurerAdapter() {
             val password = authentication.credentials.toString()
 
             // 入力された name / password をチェックする
-            if (name == username0 && password == password0) {
+            println(loginUserConfig.id)
+            if (name == loginUserConfig.id && password == loginUserConfig.password) {
                 return UsernamePasswordAuthenticationToken(name, password, authentication.getAuthorities())
             }
 
