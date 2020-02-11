@@ -3,169 +3,204 @@
 <link href="/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
     <title>総合事業CSV確認</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
 </head>
 <body>
+    <nav class="navbar navbar-expand navbar-dark bg-dark fixed-top" role="navigation">
+        <a class="navbar-brand" href="#">総合事業 CSV確認</a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target=".navbar-collapse" aria-label="Toggle navigation">
+            <span class="icon-bar"></span>
+        </button>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active"><a class="nav-link" href="#"><i class="fas fa-home" style="font-size:20px;"></i> ホーム</a></li>
+                <li class="nav-item active"><a class="nav-link" href="#file-format">ファイル形式</a></li>
+                <li class="nav-item active"><a class="nav-link" href="#csv-content">詳細</a></li>
+            </ul>
+        </div>
+    </nav>
 
-    <h1 style="color: #007755;">介護 総合事業 CSV確認</h1>
-    <h2>ファイル形式</h2>
-    <p th:text="'文字コードは「' + ${csv.encode} + '」です'"></p>
-    <div th:if=${csv.hasBom}>
-        <p>※このファイルにはBOMが含まれています。<br>利用している介護保険ソフトによっては正常に取り込めない懸念があります。</p>
-        <!-- coming soon
-        <form action="download" th:action="@{/import/download}" th:method="post">
-            <button type="submit" onclick="BOM無しファイルをダウンロードします">
-                BOM無しファイルをダウンロードする
-            </button>
-        </form>
-        -->
-    </div>
-    <h2>詳細</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>
-                    No
-                </th>
-                <th th:each="header : ${csv.HEADER}">
-                    <p scope="col" th:text=${header}>Non Header</p>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="item, status : ${csv.items}">
-                <td>
-                    <p th:text=${status.count}></p>
-                </td>
+    <main class="main-block" role="main">
+        <div id="file-format" class="padding-top">
+            <h2>ファイル形式</h2>
+            <p th:text="'文字コードは「' + ${csv.encode} + '」です'"></p>
+            <div th:if=${csv.hasBom}>
+                <p>※このファイルにはBOMが含まれています。<br>利用している介護保険ソフトによっては正常に取り込めない懸念があります。</p>
+                <!-- coming soon
+                <form action="download" th:action="@{/import/download}" th:method="post">
+                    <button type="submit" onclick="BOM無しファイルをダウンロードします">
+                        BOM無しファイルをダウンロードする
+                    </button>
+                </form>
+                -->
+            </div>
+        </div>
 
-                <div th:unless="${item.error}">
+        <div id="csv-content" class="padding-top">
+            <h2>詳細</h2>
+            <table class="table table-bordered tables-hover-rows sticky_table">
+                <thead>
+                    <tr>
+                        <th scope="col" class="table-light">
+                            No
+                        </th>
+                        <th scope="col" class="table-light" th:each="header : ${csv.HEADER}">
+                            <p scope="col" th:text=${header}>Non Header</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item, status : ${csv.items}">
+                        <td>
+                            <p th:text=${status.count}></p>
+                        </td>
 
-                    <td style="width: 300px" width="200px">
-                        <font th:text=${item.insureNumber}></font>
-                        <br>
-                        <font color="red" th:text=${item.insureNumberFormatErrorMessage}></font>
-                    </td>
+                        <div th:unless="${item.error}">
 
-                    <td>
-                        <font th:text=${item.serviceKindCode}></font>
-                        <br>
-                        <font color="red" th:text=${item.serviceKindCodeFormatErrorMessage}></font>
-                    </td>
+                            <td style="width: 300px" width="200px">
+                                <font th:text=${item.insureNumber}></font>
+                                <br>
+                                <font color="red" th:text=${item.insureNumberFormatErrorMessage}></font>
+                            </td>
 
-                    <td>
-                        <font th:text=${item.serviceCode}></font>
-                        <br>
-                        <font color="red" th:text=${item.serviceCodeFormatErrorMessage}></font>
-                    </td>
+                            <td>
+                                <font th:text=${item.serviceKindCode}></font>
+                                <br>
+                                <font color="red" th:text=${item.serviceKindCodeFormatErrorMessage}></font>
+                            </td>
 
-                    <td>
-                        <font th:text=${item.startDate}></font>
-                        <br>
-                        <font color="red" th:text=${item.startDateFormatErrorMessage}></font>
-                    </td>
+                            <td>
+                                <font th:text=${item.serviceCode}></font>
+                                <br>
+                                <font color="red" th:text=${item.serviceCodeFormatErrorMessage}></font>
+                            </td>
 
-                    <td>
-                        <font th:text=${item.endDate}></font>
-                        <br>
-                        <font color="red" th:text=${item.endDateFormatErrorMessage}></font>
-                    </td>
+                            <td>
+                                <font th:text=${item.startDate}></font>
+                                <br>
+                                <font color="red" th:text=${item.startDateFormatErrorMessage}></font>
+                            </td>
 
-                    <td>
-                        <font th:text=${item.serviceName}></font>
-                        <br>
-                        <font color="red" th:text=${item.serviceNameFormatErrorMessage}></font>
-                    </td>
+                            <td>
+                                <font th:text=${item.endDate}></font>
+                                <br>
+                                <font color="red" th:text=${item.endDateFormatErrorMessage}></font>
+                            </td>
 
-                    <td>
-                        <font th:text=${item.unitNumber}></font>
-                        <br>
-                        <font color="red" th:text=${item.unitNumberFormatErrorMessage}></font>
-                    </td>
+                            <td>
+                                <font th:text=${item.serviceName}></font>
+                                <br>
+                                <font color="red" th:text=${item.serviceNameFormatErrorMessage}></font>
+                            </td>
 
-                    <td>
-                        <font th:text=${item.countUnit}></font>
-                        <br>
-                        <font color="red" th:text=${item.countUnitFormatErrorMessage}></font>
-                    </td>
+                            <td>
+                                <font th:text=${item.unitNumber}></font>
+                                <br>
+                                <font color="red" th:text=${item.unitNumberFormatErrorMessage}></font>
+                            </td>
 
-                    <td>
-                        <font th:text=${item.limitCount}></font>
-                        <br>
-                        <font color="red" th:text=${item.limitCountFormatErrorMessage}></font>
-                    </td>
+                            <td>
+                                <font th:text=${item.countUnit}></font>
+                                <br>
+                                <font color="red" th:text=${item.countUnitFormatErrorMessage}></font>
+                            </td>
 
-                    <td>
-                        <font th:text=${item.termLimitCount}></font>
-                        <br>
-                        <font color="red" th:text=${item.termLimitCountFormatErrorMessage}></font>
-                    </td>
+                            <td>
+                                <font th:text=${item.limitCount}></font>
+                                <br>
+                                <font color="red" th:text=${item.limitCountFormatErrorMessage}></font>
+                            </td>
 
-                    <td>
-                        <font th:text=${item.paymentLimitDivision}></font>
-                        <br>
-                        <font color="red" th:text=${item.paymentLimitDivisionFormatErrorMessage}></font>
-                    </td>
+                            <td>
+                                <font th:text=${item.termLimitCount}></font>
+                                <br>
+                                <font color="red" th:text=${item.termLimitCountFormatErrorMessage}></font>
+                            </td>
 
-                    <td>
-                        <font th:text=${item.spareColumn}></font>
-                        <br>
-                        <font color="red" th:text=${item.spareColumnFormatErrorMessage}></font>
-                    </td>
+                            <td>
+                                <font th:text=${item.paymentLimitDivision}></font>
+                                <br>
+                                <font color="red" th:text=${item.paymentLimitDivisionFormatErrorMessage}></font>
+                            </td>
 
-                    <td>
-                        <font th:text=${item.paymentRate}></font>
-                        <br>
-                        <font color="red" th:text=${item.paymentRateFormatErrorMessage}></font>
-                    </td>
+                            <td>
+                                <font th:text=${item.spareColumn}></font>
+                                <br>
+                                <font color="red" th:text=${item.spareColumnFormatErrorMessage}></font>
+                            </td>
 
-                    <td>
-                        <font th:text=${item.insuredPayment}></font>
-                        <br>
-                        <font color="red" th:text=${item.insuredPaymentFormatErrorMessage}></font>
-                    </td>
+                            <td>
+                                <font th:text=${item.paymentRate}></font>
+                                <br>
+                                <font color="red" th:text=${item.paymentRateFormatErrorMessage}></font>
+                            </td>
 
-                    <td>
-                        <font th:text=${item.implementationDivisionForTarget}></font>
-                        <br>
-                        <font color="red" th:text=${item.implementationDivisionForTargetFormatErrorMessage}></font>
-                    </td>
+                            <td>
+                                <font th:text=${item.insuredPayment}></font>
+                                <br>
+                                <font color="red" th:text=${item.insuredPaymentFormatErrorMessage}></font>
+                            </td>
 
-                    <td>
-                        <font th:text=${item.implementationDivisionForSupportNeed1}></font>
-                        <br>
-                        <font color="red" th:text=${item.implementationDivisionForSupportNeed1FormatErrorMessage}></font>
-                    </td>
+                            <td>
+                                <font th:text=${item.implementationDivisionForTarget}></font>
+                                <br>
+                                <font color="red" th:text=${item.implementationDivisionForTargetFormatErrorMessage}></font>
+                            </td>
 
-                    <td>
-                        <font th:text=${item.implementationDivisionForSupportNeed2}></font>
-                        <br>
-                        <font color="red" th:text=${item.implementationDivisionForSupportNeed2FormatErrorMessage}></font>
-                    </td>
+                            <td>
+                                <font th:text=${item.implementationDivisionForSupportNeed1}></font>
+                                <br>
+                                <font color="red" th:text=${item.implementationDivisionForSupportNeed1FormatErrorMessage}></font>
+                            </td>
 
-                    <td>
-                        <font th:text=${item.consignmentDivisionInsuranceAssociation}></font>
-                        <br>
-                        <font color="red" th:text=${item.consignmentDivisionInsuranceAssociationFormatErrorMessage}></font>
-                    </td>
+                            <td>
+                                <font th:text=${item.implementationDivisionForSupportNeed2}></font>
+                                <br>
+                                <font color="red" th:text=${item.implementationDivisionForSupportNeed2FormatErrorMessage}></font>
+                            </td>
 
-                    <td>
-                        <font th:text=${item.createdDate}></font>
-                        <br>
-                        <font color="red" th:text=${item.createdDateFormatErrorMessage}></font>
-                    </td>
-                </div>
+                            <td>
+                                <font th:text=${item.consignmentDivisionInsuranceAssociation}></font>
+                                <br>
+                                <font color="red" th:text=${item.consignmentDivisionInsuranceAssociationFormatErrorMessage}></font>
+                            </td>
 
-                <div th:if="${item.error}">
-                    <td colspan="19">
-                        <font color="red" th:text=${item.errorMessage}></font>
-                    </td>
-                </div>
-            </tr>
-        </tbody>
-    </table>
+                            <td>
+                                <font th:text=${item.createdDate}></font>
+                                <br>
+                                <font color="red" th:text=${item.createdDateFormatErrorMessage}></font>
+                            </td>
+                        </div>
 
-    <!-- footer -->
-    <hr>
-    <p class="footer">produced by tatsuaki</p>
+                        <div th:if="${item.error}">
+                            <td colspan="19">
+                                <font color="red" th:text=${item.errorMessage}></font>
+                            </td>
+                        </div>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- footer -->
+        <div id="footer" class="custom-block">
+            <hr>
+            <p class="footer">produced by tatsuaki</p>
+        </div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.10.2/js/all.js"></script>
+
 </body>
 </html>
