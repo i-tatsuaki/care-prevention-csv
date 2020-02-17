@@ -4,7 +4,7 @@ import com.tatsuaki.carepreventioncsv.model.domain.csvcolumn.*
 
 import java.util.Arrays
 
-class CarePreventionCsvItem private constructor(csvLine: String) {
+class CarePreventionCsvItem private constructor(columns: Array<String>) {
 
     // 証記載保険者番号
     private val insureNumber: InsureNumber?
@@ -127,13 +127,10 @@ class CarePreventionCsvItem private constructor(csvLine: String) {
         get() = createdDate!!.formatErrorMessage
 
     init {
-        val array = csvLine.split(",".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-        val columns = Arrays.asList(*array)
-
         // カラム数チェック
         if (columns.size != CSV_COLUMN_NUMBER) {
             isError = true
-            errorMessage = "カラム数が誤っています:$csvLine"
+            errorMessage = "カラム数が誤っています:$columns"
 
             this.insureNumber = null
             this.serviceKindCode = null
@@ -272,8 +269,8 @@ class CarePreventionCsvItem private constructor(csvLine: String) {
 
         private val CSV_COLUMN_NUMBER = 19
 
-        fun CreateFromCsvLine(csvLine: String): CarePreventionCsvItem {
-            return CarePreventionCsvItem(csvLine)
+        fun CreateFromCsvLine(columns: Array<String>): CarePreventionCsvItem {
+            return CarePreventionCsvItem(columns)
         }
     }
 
