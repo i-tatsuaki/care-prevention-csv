@@ -23,14 +23,14 @@ open class WebSecurityConfiguration : WebSecurityConfigurerAdapter() {
     lateinit var loginUserConfig: LoginUserConfig
 
     override fun configure(web: WebSecurity) {
+    }
+
+    override fun configure(http: HttpSecurity) {
         http.antMatcher("/**") // Basic認証の対象となるパス
         http.httpBasic() // Basic認証を指定
         http.authorizeRequests().anyRequest().authenticated() // 対象のすべてのパスに対して認証を有効にする
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS) // すべてのリクエストをステートレスとして設定
-    }
-
-    override fun configure(http: HttpSecurity) {
-        // TODO: URLごとに異なるセキュリティ設定を行う
+        http.logout().deleteCookies("JSESSIONID")
     }
 
     override fun configure(auth: AuthenticationManagerBuilder) {
@@ -47,8 +47,6 @@ open class WebSecurityConfiguration : WebSecurityConfigurerAdapter() {
             val name = authentication.name
             val password = authentication.credentials.toString()
 
-            // 入力された name / password をチェックする
-            println(loginUserConfig.id)
             if (name == loginUserConfig.id && password == loginUserConfig.password) {
                 return UsernamePasswordAuthenticationToken(name, password, authentication.getAuthorities())
             }
