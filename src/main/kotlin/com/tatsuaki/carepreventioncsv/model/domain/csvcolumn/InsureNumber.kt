@@ -2,32 +2,35 @@ package com.tatsuaki.carepreventioncsv.model.domain.csvcolumn
 
 import java.util.regex.Pattern
 
-class InsureNumber(val insureNumber: String) {
+class InsureNumber(insureNumber: String) : CsvColumn(insureNumber) {
 
-    val formatErrorMessage: String
-        get() {
-            val errorMessageBuilder = StringBuilder()
+    override fun getFormatErrorMessage(): String {
+        val errorMessageBuilder = StringBuilder()
 
-            if (!validateCharcter()) {
-                errorMessageBuilder.append("数字0~9以外が含まれています.")
-            }
-
-            if (!validateLength()) {
-                errorMessageBuilder.append("6桁ではありません.")
-            }
-
-            return errorMessageBuilder.toString()
+        if (!validateCharacter()) {
+            errorMessageBuilder.append("数字0~9以外が含まれています.")
         }
 
-    private fun validateCharcter(): Boolean {
+        if (!validateLength()) {
+            errorMessageBuilder.append("6桁ではありません.")
+        }
+
+        return errorMessageBuilder.toString()
+    }
+
+    override fun validate(): Boolean {
+        return validateCharacter() && validateLength()
+    }
+
+    private fun validateCharacter(): Boolean {
         val regex = "[0-9]*"
         val p = Pattern.compile(regex)
-        val m = p.matcher(insureNumber)
+        val m = p.matcher(content)
         return m.matches()
     }
 
     private fun validateLength(): Boolean {
-        return insureNumber.length == LENGTH
+        return content.length == LENGTH
     }
 
     companion object {

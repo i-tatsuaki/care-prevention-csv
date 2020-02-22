@@ -66,9 +66,10 @@
                         <div th:unless="${item.error}">
 
                             <td style="width: 300px" width="200px">
-                                <font th:text=${item.insureNumber}></font>
-                                <br>
-                                <font color="red" th:text=${item.insureNumberFormatErrorMessage}></font>
+                                <div th:unless="${item.insureNumber.error}">
+                                    <i class="fas fa-exclamation-triangle error-icon" href="#" title="エラー内容" data-toggle="popover" data-trigger="hover" data-content="エラー発生" th:data-content=${item.insureNumber.formatErrorMessage}></i>
+                                </div>
+                                <font th:text=${item.insureNumber.content}></font>
                             </td>
 
                             <td>
@@ -202,5 +203,12 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.10.2/js/all.js"></script>
 
+    <script>
+        (function() {
+          window.addEventListener("load", function () {
+            $('[data-toggle="popover"]').popover();
+          });
+        })();
+    </script>
 </body>
 </html>

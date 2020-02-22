@@ -44,6 +44,12 @@ body {
   white-space: nowrap;
 }
 
+/* icon */
+.error-icon {
+    font-size:10px;
+    color:red;
+}
+
 /* footer */
 .footer {
   font-size: 60%;
