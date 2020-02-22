@@ -1,17 +1,20 @@
 package com.tatsuaki.carepreventioncsv.model.domain.csvcolumn
 
-class ServiceKindCode(val serviceKindCode: String) {
+class ServiceKindCode(serviceKindCode: String) : CsvColumn(serviceKindCode) {
 
-    val formatErrorMessage: String
-        get() {
-            val errorMessageBuilder = StringBuilder()
+    override fun getFormatErrorMessage(): String {
+        val errorMessageBuilder = StringBuilder()
 
-            if (!validateCodeFormat()) {
-                errorMessageBuilder.append("存在しない総合事業サービス種類コードです.")
-            }
-
-            return errorMessageBuilder.toString()
+        if (!validateCodeFormat()) {
+            errorMessageBuilder.append("存在しない総合事業サービス種類コードです.")
         }
+
+        return errorMessageBuilder.toString()
+    }
+
+    override fun validate(): Boolean {
+        return validateCodeFormat()
+    }
 
     enum class Code {
         A2,
@@ -31,7 +34,7 @@ class ServiceKindCode(val serviceKindCode: String) {
 
     private fun validateCodeFormat(): Boolean {
         try {
-            Code.valueOf(serviceKindCode)
+            Code.valueOf(content)
             return true
         } catch (e: IllegalArgumentException) {
             return false

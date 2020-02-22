@@ -69,9 +69,6 @@ class CarePreventionCsvItem private constructor(columns: Array<String>) {
     // エラーメッセージ
     val errorMessage: String
 
-    val serviceKindCodeFormatErrorMessage: String
-        get() = serviceKindCode!!.formatErrorMessage
-
     val serviceCodeFormatErrorMessage: String
         get() = serviceCode!!.formatErrorMessage
 
@@ -180,8 +177,8 @@ class CarePreventionCsvItem private constructor(columns: Array<String>) {
         return insureNumber
     }
 
-    fun getServiceKindCode(): String {
-        return serviceKindCode!!.serviceKindCode
+    fun getServiceKindCode(): CsvColumn? {
+        return serviceKindCode
     }
 
     fun getServiceCode(): String {
