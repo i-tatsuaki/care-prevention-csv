@@ -55,6 +55,10 @@ class ImplementationDivisionForSupportNeed2(implementationDivisionForSupportNeed
             ""
     }
 
+    override fun getFormatContent(): String {
+        return content + getJapanese(content)
+    }
+
     override fun validateCodeFormat(): Boolean {
         return ImplementationDivisionForSupportNeed2.Code.contains(content)
     }

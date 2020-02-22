@@ -7,6 +7,10 @@ class SpareColumn(spareColumn: String) : CsvColumn(spareColumn) {
         return ""
     }
 
+    override fun getFormatContent(): String {
+        return content
+    }
+
     override fun validateCharacter(): Boolean {
         return true
     }

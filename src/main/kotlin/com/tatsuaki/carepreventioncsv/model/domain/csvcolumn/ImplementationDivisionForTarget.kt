@@ -47,15 +47,15 @@ class ImplementationDivisionForTarget(implementationDivisionForTarget: String) :
         }
     }
 
-    fun getImplementationDivisionForTarget(): String {
-        return content + getJapanese(content)
-    }
-
     private fun getJapanese(implementationDivisionForTarget: String): String {
         return if (validateCodeFormat())
             "(" + ImplementationDivisionForTarget.Code.getJapanese(implementationDivisionForTarget) + ")"
         else
             ""
+    }
+
+    override fun getFormatContent(): String {
+        return content + getJapanese(content)
     }
 
     override fun validateCodeFormat(): Boolean {

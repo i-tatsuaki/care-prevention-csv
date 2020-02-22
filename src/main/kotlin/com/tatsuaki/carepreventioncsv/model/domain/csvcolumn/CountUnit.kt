@@ -49,15 +49,15 @@ class CountUnit(countUnit: String) : CsvColumn(countUnit) {
         }
     }
 
-    fun getCountUnit(): String {
-        return content + getJapanese(content)
-    }
-
     private fun getJapanese(countUnit: String): String {
         return if (validateCodeFormat())
             "(" + Code.getJapanese(countUnit) + ")"
         else
             ""
+    }
+
+    override fun getFormatContent(): String {
+        return content + getJapanese(content)
     }
 
     override fun validateCodeFormat(): Boolean {

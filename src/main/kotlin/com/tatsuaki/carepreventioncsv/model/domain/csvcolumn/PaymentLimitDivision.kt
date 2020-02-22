@@ -46,15 +46,15 @@ class PaymentLimitDivision(paymentLimitDivision: String) : CsvColumn(paymentLimi
         }
     }
 
-    fun getPaymentLimitDivision(): String {
-        return content + getJapanese(content)
-    }
-
     private fun getJapanese(paymentLimitDivision: String): String {
         return if (validateCodeFormat() && !paymentLimitDivision.isEmpty())
             "(" + PaymentLimitDivision.Code.getJapanese(paymentLimitDivision) + ")"
         else
             ""
+    }
+
+    override fun getFormatContent(): String {
+        return content + getJapanese(content)
     }
 
     override fun validateCodeFormat(): Boolean {

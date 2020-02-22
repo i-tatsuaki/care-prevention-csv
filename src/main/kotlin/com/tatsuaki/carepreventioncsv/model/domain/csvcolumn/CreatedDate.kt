@@ -15,7 +15,11 @@ class CreatedDate(createdDate: String) : CsvColumn(createdDate) {
             errorMessageBuilder.append("8桁ではありません.")
         }
 
-        return errorMessageBuilder.toString()
+    return errorMessageBuilder.toString()
+    }
+
+    override fun getFormatContent(): String {
+        return content
     }
 
     override fun validateCharacter(): Boolean {

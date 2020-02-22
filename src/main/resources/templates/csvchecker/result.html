@@ -65,7 +65,7 @@
 
                         <div th:unless="${item.error}">
                             <td th:each="column : ${item.columns}">
-                                <font th:text=${column.content}></font>
+                                <font th:text=${column.formatContent}></font>
                                 <div th:unless="${column.error}">
                                     <span data-toggle="popover" data-trigger="hover" th:data-content=${column.formatErrorMessage}>
                                         <i class="fas fa-exclamation-triangle error-icon"></i>

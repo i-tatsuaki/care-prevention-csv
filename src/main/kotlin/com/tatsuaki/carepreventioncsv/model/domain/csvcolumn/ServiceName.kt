@@ -12,6 +12,10 @@ class ServiceName(serviceName: String) : CsvColumn(serviceName) {
         return errorMessageBuilder.toString()
     }
 
+    override fun getFormatContent(): String {
+        return content
+    }
+
     override fun validateLength(): Boolean {
         return content.length <= LENGTH
     }

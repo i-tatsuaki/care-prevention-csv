@@ -18,6 +18,10 @@ class ServiceCode(serviceCode: String) : CsvColumn(serviceCode) {
         return errorMessageBuilder.toString()
     }
 
+    override fun getFormatContent(): String {
+        return content
+    }
+
     override fun validateCharacter(): Boolean {
         val regex = "[0-9a-zA-Z]*"
         val p = Pattern.compile(regex)

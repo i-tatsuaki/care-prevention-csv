@@ -28,6 +28,10 @@ class ServiceKindCode(serviceKindCode: String) : CsvColumn(serviceKindCode) {
         AF
     }
 
+    override fun getFormatContent(): String {
+        return content
+    }
+
     override fun validateCodeFormat(): Boolean {
         try {
             Code.valueOf(content)

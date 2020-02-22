@@ -59,6 +59,10 @@ class ConsignmentDivisionInsuranceAssociation(consignmentDivisionInsuranceAssoci
             ""
     }
 
+    override fun getFormatContent(): String {
+        return content + getJapanese(content)
+    }
+
     override fun validateCodeFormat(): Boolean {
         return Code.contains(content)
     }

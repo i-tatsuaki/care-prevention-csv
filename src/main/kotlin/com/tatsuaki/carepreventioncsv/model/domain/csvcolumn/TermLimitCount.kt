@@ -48,15 +48,15 @@ class TermLimitCount(termLimitCount: String) : CsvColumn(termLimitCount) {
         }
     }
 
-    fun getTermLimitCount(): String {
-        return content + getJapanese(content)
-    }
-
     private fun getJapanese(termLimitCount: String): String {
         return if (validateCodeFormat() && !termLimitCount.isEmpty())
             "(" + TermLimitCount.Code.getJapanese(termLimitCount) + ")"
         else
             ""
+    }
+
+    override fun getFormatContent(): String {
+        return content + getJapanese(content)
     }
 
     override fun validateCodeFormat(): Boolean {

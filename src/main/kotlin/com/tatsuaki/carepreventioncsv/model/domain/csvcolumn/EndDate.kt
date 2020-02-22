@@ -18,6 +18,10 @@ class EndDate(endDate: String) : CsvColumn(endDate) {
         return errorMessageBuilder.toString()
     }
 
+    override fun getFormatContent(): String {
+        return content
+    }
+
     override fun validateCharacter(): Boolean {
         val regex = "[0-9]*"
         val p = Pattern.compile(regex)

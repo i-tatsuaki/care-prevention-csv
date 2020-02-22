@@ -48,15 +48,15 @@ class ImplementationDivisionForSupportNeed1(implementationDivisionForSupportNeed
         }
     }
 
-    fun getImplementationDivisionForSupportNeed1(): String {
-        return content + getJapanese(content)
-    }
-
     private fun getJapanese(implementationDivisionForSupportNeed1: String): String {
         return if (validateCodeFormat())
             "(" + ImplementationDivisionForSupportNeed1.Code.getJapanese(implementationDivisionForSupportNeed1) + ")"
         else
             ""
+    }
+
+    override fun getFormatContent(): String {
+        return content + getJapanese(content)
     }
 
     override fun validateCodeFormat(): Boolean {

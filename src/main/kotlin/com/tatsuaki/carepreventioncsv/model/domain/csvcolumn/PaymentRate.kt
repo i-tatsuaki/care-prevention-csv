@@ -18,6 +18,10 @@ class PaymentRate(paymentRate: String) : CsvColumn(paymentRate) {
         return errorMessageBuilder.toString()
     }
 
+    override fun getFormatContent(): String {
+        return content
+    }
+
     override fun validateCharacter(): Boolean {
         val regex = "[0-9]*"
         val p = Pattern.compile(regex)
