@@ -27,7 +27,7 @@ class LimitCount(val limitCount: String) {
     }
 
     private fun validateLength(): Boolean {
-        return limitCount.isEmpty() || limitCount.length == LENGTH
+        return limitCount.isEmpty() || limitCount.length <= LENGTH
     }
 
     companion object {
