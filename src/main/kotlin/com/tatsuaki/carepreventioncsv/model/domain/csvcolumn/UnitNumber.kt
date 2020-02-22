@@ -2,32 +2,35 @@ package com.tatsuaki.carepreventioncsv.model.domain.csvcolumn
 
 import java.util.regex.Pattern
 
-class UnitNumber(val unitNumber: String) {
+class UnitNumber(unitNumber: String) : CsvColumn(unitNumber) {
 
-    val formatErrorMessage: String
-        get() {
-            val errorMessageBuilder = StringBuilder()
+    override fun getFormatErrorMessage(): String {
+        val errorMessageBuilder = StringBuilder()
 
-            if (!validateCharcter()) {
-                errorMessageBuilder.append("単位数表現が誤っています.")
-            }
-
-            if (!validateLength()) {
-                errorMessageBuilder.append("最大桁5桁を超えています.")
-            }
-
-            return errorMessageBuilder.toString()
+        if (!validateCharacter()) {
+            errorMessageBuilder.append("単位数表現が誤っています.")
         }
 
-    private fun validateCharcter(): Boolean {
+        if (!validateLength()) {
+            errorMessageBuilder.append("最大桁5桁を超えています.")
+        }
+
+        return errorMessageBuilder.toString()
+    }
+
+    override fun validateCharacter(): Boolean {
         val regex = "[0-9]*|-[0-9]*"
         val p = Pattern.compile(regex)
-        val m = p.matcher(unitNumber)
+        val m = p.matcher(content)
         return m.matches()
     }
 
-    private fun validateLength(): Boolean {
-        return unitNumber.length <= LENGTH
+    override fun validateLength(): Boolean {
+        return content.length <= LENGTH
+    }
+
+    override fun validateCodeFormat(): Boolean {
+        return true
     }
 
     companion object {

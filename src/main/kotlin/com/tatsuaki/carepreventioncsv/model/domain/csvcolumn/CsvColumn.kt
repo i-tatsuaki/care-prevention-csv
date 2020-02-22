@@ -7,6 +7,12 @@ abstract class CsvColumn(val content: String) {
             return validate()
         }
 
+    fun validate(): Boolean {
+        return validateCharacter() && validateLength() && validateCodeFormat()
+    }
+
     abstract fun getFormatErrorMessage(): String
-    abstract fun validate(): Boolean
+    abstract fun validateCharacter(): Boolean
+    abstract fun validateLength(): Boolean
+    abstract fun validateCodeFormat(): Boolean
 }

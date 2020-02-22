@@ -4,18 +4,17 @@ import java.util.Arrays
 
 import java.util.stream.Collectors.toList
 
-class PaymentLimitDivision(private val paymentLimitDivision: String) {
+class PaymentLimitDivision(paymentLimitDivision: String) : CsvColumn(paymentLimitDivision) {
 
-    val formatErrorMessage: String
-        get() {
-            val errorMessageBuilder = StringBuilder()
+    override fun getFormatErrorMessage(): String {
+        val errorMessageBuilder = StringBuilder()
 
-            if (!validateCodeFormat()) {
-                errorMessageBuilder.append("存在しない支給限度額対象区分コードです.")
-            }
-
-            return errorMessageBuilder.toString()
+        if (!validateCodeFormat()) {
+            errorMessageBuilder.append("存在しない支給限度額対象区分コードです.")
         }
+
+        return errorMessageBuilder.toString()
+    }
 
     enum class Code private constructor(val code: String, val japanese: String) {
 
@@ -48,7 +47,7 @@ class PaymentLimitDivision(private val paymentLimitDivision: String) {
     }
 
     fun getPaymentLimitDivision(): String {
-        return paymentLimitDivision + getJapanese(paymentLimitDivision)
+        return content + getJapanese(content)
     }
 
     private fun getJapanese(paymentLimitDivision: String): String {
@@ -58,7 +57,15 @@ class PaymentLimitDivision(private val paymentLimitDivision: String) {
             ""
     }
 
-    private fun validateCodeFormat(): Boolean {
-        return paymentLimitDivision.isEmpty() || PaymentLimitDivision.Code.contains(paymentLimitDivision)
+    override fun validateCodeFormat(): Boolean {
+        return content.isEmpty() || PaymentLimitDivision.Code.contains(content)
+    }
+
+    override fun validateCharacter(): Boolean {
+        return true
+    }
+
+    override fun validateLength(): Boolean {
+        return true
     }
 }

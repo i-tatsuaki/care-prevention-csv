@@ -1,20 +1,27 @@
 package com.tatsuaki.carepreventioncsv.model.domain.csvcolumn
 
-class ServiceName(val serviceName: String) {
+class ServiceName(serviceName: String) : CsvColumn(serviceName) {
 
-    val formatErrorMessage: String
-        get() {
-            val errorMessageBuilder = StringBuilder()
+    override fun getFormatErrorMessage(): String {
+        val errorMessageBuilder = StringBuilder()
 
-            if (!validateLength()) {
-                errorMessageBuilder.append("文字数が64を超えています.")
-            }
-
-            return errorMessageBuilder.toString()
+        if (!validateLength()) {
+            errorMessageBuilder.append("文字数が64を超えています.")
         }
 
-    private fun validateLength(): Boolean {
-        return serviceName.length <= LENGTH
+        return errorMessageBuilder.toString()
+    }
+
+    override fun validateLength(): Boolean {
+        return content.length <= LENGTH
+    }
+
+    override fun validateCharacter(): Boolean {
+        return true
+    }
+
+    override fun validateCodeFormat(): Boolean {
+        return true
     }
 
     companion object {

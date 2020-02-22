@@ -4,18 +4,17 @@ import java.util.Arrays
 
 import java.util.stream.Collectors.toList
 
-class ImplementationDivisionForSupportNeed1(private val implementationDivisionForSupportNeed1: String) {
+class ImplementationDivisionForSupportNeed1(implementationDivisionForSupportNeed1: String) : CsvColumn(implementationDivisionForSupportNeed1) {
 
-    val formatErrorMessage: String
-        get() {
-            val errorMessageBuilder = StringBuilder()
+    override fun getFormatErrorMessage(): String {
+        val errorMessageBuilder = StringBuilder()
 
-            if (!validateCodeFormat()) {
-                errorMessageBuilder.append("存在しない要支援１受給者実施区分コードです.")
-            }
-
-            return errorMessageBuilder.toString()
+        if (!validateCodeFormat()) {
+            errorMessageBuilder.append("存在しない要支援１受給者実施区分コードです.")
         }
+
+        return errorMessageBuilder.toString()
+    }
 
 
     enum class Code private constructor(val code: String, val japanese: String) {
@@ -50,7 +49,7 @@ class ImplementationDivisionForSupportNeed1(private val implementationDivisionFo
     }
 
     fun getImplementationDivisionForSupportNeed1(): String {
-        return implementationDivisionForSupportNeed1 + getJapanese(implementationDivisionForSupportNeed1)
+        return content + getJapanese(content)
     }
 
     private fun getJapanese(implementationDivisionForSupportNeed1: String): String {
@@ -60,7 +59,15 @@ class ImplementationDivisionForSupportNeed1(private val implementationDivisionFo
             ""
     }
 
-    private fun validateCodeFormat(): Boolean {
-        return ImplementationDivisionForSupportNeed1.Code.contains(implementationDivisionForSupportNeed1)
+    override fun validateCodeFormat(): Boolean {
+        return ImplementationDivisionForSupportNeed1.Code.contains(content)
+    }
+
+    override fun validateCharacter(): Boolean {
+        return true
+    }
+
+    override fun validateLength(): Boolean {
+        return true
     }
 }

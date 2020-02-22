@@ -18,19 +18,19 @@ class InsureNumber(insureNumber: String) : CsvColumn(insureNumber) {
         return errorMessageBuilder.toString()
     }
 
-    override fun validate(): Boolean {
-        return validateCharacter() && validateLength()
-    }
-
-    private fun validateCharacter(): Boolean {
+    override fun validateCharacter(): Boolean {
         val regex = "[0-9]*"
         val p = Pattern.compile(regex)
         val m = p.matcher(content)
         return m.matches()
     }
 
-    private fun validateLength(): Boolean {
+    override fun validateLength(): Boolean {
         return content.length == LENGTH
+    }
+
+    override fun validateCodeFormat(): Boolean {
+        return true
     }
 
     companion object {

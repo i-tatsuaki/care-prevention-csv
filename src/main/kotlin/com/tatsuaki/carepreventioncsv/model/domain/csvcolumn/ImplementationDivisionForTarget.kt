@@ -4,18 +4,17 @@ import java.util.Arrays
 
 import java.util.stream.Collectors.toList
 
-class ImplementationDivisionForTarget(private val implementationDivisionForTarget: String) {
+class ImplementationDivisionForTarget(implementationDivisionForTarget: String) : CsvColumn(implementationDivisionForTarget) {
 
-    val formatErrorMessage: String
-        get() {
-            val errorMessageBuilder = StringBuilder()
+    override fun getFormatErrorMessage(): String {
+        val errorMessageBuilder = StringBuilder()
 
-            if (!validateCodeFormat()) {
-                errorMessageBuilder.append("存在しない事業対象者実施区分コードです.")
-            }
-
-            return errorMessageBuilder.toString()
+        if (!validateCodeFormat()) {
+            errorMessageBuilder.append("存在しない事業対象者実施区分コードです.")
         }
+
+        return errorMessageBuilder.toString()
+    }
 
     enum class Code private constructor(val code: String, val japanese: String) {
 
@@ -49,7 +48,7 @@ class ImplementationDivisionForTarget(private val implementationDivisionForTarge
     }
 
     fun getImplementationDivisionForTarget(): String {
-        return implementationDivisionForTarget + getJapanese(implementationDivisionForTarget)
+        return content + getJapanese(content)
     }
 
     private fun getJapanese(implementationDivisionForTarget: String): String {
@@ -59,7 +58,15 @@ class ImplementationDivisionForTarget(private val implementationDivisionForTarge
             ""
     }
 
-    private fun validateCodeFormat(): Boolean {
-        return ImplementationDivisionForTarget.Code.contains(implementationDivisionForTarget)
+    override fun validateCodeFormat(): Boolean {
+        return ImplementationDivisionForTarget.Code.contains(content)
+    }
+
+    override fun validateCharacter(): Boolean {
+        return true
+    }
+
+    override fun validateLength(): Boolean {
+        return true
     }
 }

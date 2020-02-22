@@ -2,32 +2,35 @@ package com.tatsuaki.carepreventioncsv.model.domain.csvcolumn
 
 import java.util.regex.Pattern
 
-class CreatedDate(val createdDate: String) {
+class CreatedDate(createdDate: String) : CsvColumn(createdDate) {
 
-    val formatErrorMessage: String
-        get() {
-            val errorMessageBuilder = StringBuilder()
+    override fun getFormatErrorMessage(): String {
+        val errorMessageBuilder = StringBuilder()
 
-            if (!validateCharcter()) {
-                errorMessageBuilder.append("数字0~9以外が含まれています.")
-            }
-
-            if (!validateLength()) {
-                errorMessageBuilder.append("8桁ではありません.")
-            }
-
-            return errorMessageBuilder.toString()
+        if (!validateCharacter()) {
+            errorMessageBuilder.append("数字0~9以外が含まれています.")
         }
 
-    private fun validateCharcter(): Boolean {
+        if (!validateLength()) {
+            errorMessageBuilder.append("8桁ではありません.")
+        }
+
+        return errorMessageBuilder.toString()
+    }
+
+    override fun validateCharacter(): Boolean {
         val regex = "[0-9]*"
         val p = Pattern.compile(regex)
-        val m = p.matcher(createdDate)
+        val m = p.matcher(content)
         return m.matches()
     }
 
-    private fun validateLength(): Boolean {
-        return createdDate.length == LENGTH
+    override fun validateLength(): Boolean {
+        return content.length == LENGTH
+    }
+
+    override fun validateCodeFormat(): Boolean {
+        return true
     }
 
     companion object {

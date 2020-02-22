@@ -4,18 +4,17 @@ import java.util.Arrays
 
 import java.util.stream.Collectors.toList
 
-class TermLimitCount(private val termLimitCount: String) {
+class TermLimitCount(termLimitCount: String) : CsvColumn(termLimitCount) {
 
-    val formatErrorMessage: String
-        get() {
-            val errorMessageBuilder = StringBuilder()
+    override fun getFormatErrorMessage(): String {
+        val errorMessageBuilder = StringBuilder()
 
-            if (!validateCodeFormat()) {
-                errorMessageBuilder.append("存在しない算定回数制限期間コードです.")
-            }
-
-            return errorMessageBuilder.toString()
+        if (!validateCodeFormat()) {
+            errorMessageBuilder.append("存在しない算定回数制限期間コードです.")
         }
+
+        return errorMessageBuilder.toString()
+    }
 
     enum class Code private constructor(val code: String, val japanese: String) {
 
@@ -50,7 +49,7 @@ class TermLimitCount(private val termLimitCount: String) {
     }
 
     fun getTermLimitCount(): String {
-        return termLimitCount + getJapanese(termLimitCount)
+        return content + getJapanese(content)
     }
 
     private fun getJapanese(termLimitCount: String): String {
@@ -60,7 +59,15 @@ class TermLimitCount(private val termLimitCount: String) {
             ""
     }
 
-    private fun validateCodeFormat(): Boolean {
-        return termLimitCount.isEmpty() || TermLimitCount.Code.contains(termLimitCount)
+    override fun validateCodeFormat(): Boolean {
+        return content.isEmpty() || TermLimitCount.Code.contains(content)
+    }
+
+    override fun validateCharacter(): Boolean {
+        return true
+    }
+
+    override fun validateLength(): Boolean {
+        return true
     }
 }

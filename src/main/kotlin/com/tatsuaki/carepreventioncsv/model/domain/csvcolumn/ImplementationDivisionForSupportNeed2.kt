@@ -4,18 +4,17 @@ import java.util.Arrays
 
 import java.util.stream.Collectors.toList
 
-class ImplementationDivisionForSupportNeed2(val implementationDivisionForSupportNeed2: String) {
+class ImplementationDivisionForSupportNeed2(implementationDivisionForSupportNeed2: String) : CsvColumn(implementationDivisionForSupportNeed2) {
 
-    val formatErrorMessage: String
-        get() {
-            val errorMessageBuilder = StringBuilder()
+    override fun getFormatErrorMessage(): String {
+        val errorMessageBuilder = StringBuilder()
 
-            if (!validateCodeFormat()) {
-                errorMessageBuilder.append("存在しない要支援２受給者実施区分コードです.")
-            }
-
-            return errorMessageBuilder.toString()
+        if (!validateCodeFormat()) {
+            errorMessageBuilder.append("存在しない要支援２受給者実施区分コードです.")
         }
+
+        return errorMessageBuilder.toString()
+    }
 
 
     enum class Code private constructor(val code: String, val japanese: String) {
@@ -56,7 +55,15 @@ class ImplementationDivisionForSupportNeed2(val implementationDivisionForSupport
             ""
     }
 
-    private fun validateCodeFormat(): Boolean {
-        return ImplementationDivisionForSupportNeed2.Code.contains(implementationDivisionForSupportNeed2)
+    override fun validateCodeFormat(): Boolean {
+        return ImplementationDivisionForSupportNeed2.Code.contains(content)
+    }
+
+    override fun validateCharacter(): Boolean {
+        return true
+    }
+
+    override fun validateLength(): Boolean {
+        return true
     }
 }

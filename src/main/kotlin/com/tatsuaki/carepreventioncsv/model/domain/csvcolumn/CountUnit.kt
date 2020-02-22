@@ -4,18 +4,17 @@ import java.util.Arrays
 
 import java.util.stream.Collectors.toList
 
-class CountUnit(private val countUnit: String) {
+class CountUnit(countUnit: String) : CsvColumn(countUnit) {
 
-    val formatErrorMessage: String
-        get() {
-            val errorMessageBuilder = StringBuilder()
+    override fun getFormatErrorMessage(): String {
+        val errorMessageBuilder = StringBuilder()
 
-            if (!validateCodeFormat()) {
-                errorMessageBuilder.append("存在しない算定単位コードです.")
-            }
-
-            return errorMessageBuilder.toString()
+        if (!validateCodeFormat()) {
+            errorMessageBuilder.append("存在しない算定単位コードです.")
         }
+
+        return errorMessageBuilder.toString()
+    }
 
     enum class Code private constructor(val code: String, val japanese: String) {
 
@@ -51,7 +50,7 @@ class CountUnit(private val countUnit: String) {
     }
 
     fun getCountUnit(): String {
-        return countUnit + getJapanese(countUnit)
+        return content + getJapanese(content)
     }
 
     private fun getJapanese(countUnit: String): String {
@@ -61,7 +60,15 @@ class CountUnit(private val countUnit: String) {
             ""
     }
 
-    private fun validateCodeFormat(): Boolean {
-        return Code.contains(countUnit)
+    override fun validateCodeFormat(): Boolean {
+        return Code.contains(content)
+    }
+
+    override fun validateCharacter(): Boolean {
+        return true
+    }
+
+    override fun validateLength(): Boolean {
+        return true
     }
 }

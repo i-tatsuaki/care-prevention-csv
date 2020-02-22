@@ -12,10 +12,6 @@ class ServiceKindCode(serviceKindCode: String) : CsvColumn(serviceKindCode) {
         return errorMessageBuilder.toString()
     }
 
-    override fun validate(): Boolean {
-        return validateCodeFormat()
-    }
-
     enum class Code {
         A2,
         A3,
@@ -32,13 +28,19 @@ class ServiceKindCode(serviceKindCode: String) : CsvColumn(serviceKindCode) {
         AF
     }
 
-    private fun validateCodeFormat(): Boolean {
+    override fun validateCodeFormat(): Boolean {
         try {
             Code.valueOf(content)
             return true
         } catch (e: IllegalArgumentException) {
             return false
         }
+    }
+    override fun validateCharacter(): Boolean {
+        return true
+    }
 
+    override fun validateLength(): Boolean {
+        return true
     }
 }

@@ -2,32 +2,35 @@ package com.tatsuaki.carepreventioncsv.model.domain.csvcolumn
 
 import java.util.regex.Pattern
 
-class ServiceCode(val serviceCode: String) {
+class ServiceCode(serviceCode: String) : CsvColumn(serviceCode) {
 
-    val formatErrorMessage: String
-        get() {
-            val errorMessageBuilder = StringBuilder()
+    override fun getFormatErrorMessage(): String {
+        val errorMessageBuilder = StringBuilder()
 
-            if (!validateCharcter()) {
-                errorMessageBuilder.append("英数以外が含まれています.")
-            }
-
-            if (!validateLength()) {
-                errorMessageBuilder.append("4桁ではありません.")
-            }
-
-            return errorMessageBuilder.toString()
+        if (!validateCharacter()) {
+            errorMessageBuilder.append("英数以外が含まれています.")
         }
 
-    private fun validateCharcter(): Boolean {
+        if (!validateLength()) {
+            errorMessageBuilder.append("4桁ではありません.")
+        }
+
+        return errorMessageBuilder.toString()
+    }
+
+    override fun validateCharacter(): Boolean {
         val regex = "[0-9a-zA-Z]*"
         val p = Pattern.compile(regex)
-        val m = p.matcher(serviceCode)
+        val m = p.matcher(content)
         return m.matches()
     }
 
-    private fun validateLength(): Boolean {
-        return serviceCode.length == LENGTH
+    override fun validateLength(): Boolean {
+        return content.length == LENGTH
+    }
+
+    override fun validateCodeFormat(): Boolean {
+        return true
     }
 
     companion object {

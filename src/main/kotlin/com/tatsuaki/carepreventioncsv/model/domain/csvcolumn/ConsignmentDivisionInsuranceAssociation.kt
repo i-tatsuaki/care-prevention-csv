@@ -7,22 +7,21 @@ import java.util.stream.Collectors.toList
 /**
  * 事業対象者実施区分コード
  */
-class ConsignmentDivisionInsuranceAssociation(private val consignmentDivisionInsuranceAssociation: String) {
+class ConsignmentDivisionInsuranceAssociation(consignmentDivisionInsuranceAssociation: String) : CsvColumn(consignmentDivisionInsuranceAssociation) {
 
-    val formatErrorMessage: String
-        get() {
-            val errorMessageBuilder = StringBuilder()
+    override fun getFormatErrorMessage(): String {
+        val errorMessageBuilder = StringBuilder()
 
-            if (!validateCodeFormat()) {
-                errorMessageBuilder.append("存在しない事業対象者実施区分コードです.")
-            }
-
-            return errorMessageBuilder.toString()
+        if (!validateCodeFormat()) {
+            errorMessageBuilder.append("存在しない事業対象者実施区分コードです.")
         }
+
+        return errorMessageBuilder.toString()
+    }
 
     val description: String
         get() {
-            return consignmentDivisionInsuranceAssociation + getJapanese(consignmentDivisionInsuranceAssociation)
+            return content + getJapanese(content)
         }
 
     private enum class Code constructor(val code: String, val japanese: String) {
@@ -60,7 +59,15 @@ class ConsignmentDivisionInsuranceAssociation(private val consignmentDivisionIns
             ""
     }
 
-    private fun validateCodeFormat(): Boolean {
-        return Code.contains(consignmentDivisionInsuranceAssociation)
+    override fun validateCodeFormat(): Boolean {
+        return Code.contains(content)
+    }
+
+    override fun validateCharacter(): Boolean {
+        return true
+    }
+
+    override fun validateLength(): Boolean {
+        return true
     }
 }

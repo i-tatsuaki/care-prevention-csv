@@ -1,8 +1,21 @@
 package com.tatsuaki.carepreventioncsv.model.domain.csvcolumn
 
-class SpareColumn(val spareColumn: String) {
+class SpareColumn(spareColumn: String) : CsvColumn(spareColumn) {
 
-    // フリーテキストのためチェックなし
-    val formatErrorMessage: String
-        get() = ""
+    override fun getFormatErrorMessage(): String {
+        // フリーテキストのためチェックなし
+        return ""
+    }
+
+    override fun validateCharacter(): Boolean {
+        return true
+    }
+
+    override fun validateLength(): Boolean {
+        return true
+    }
+
+    override fun validateCodeFormat(): Boolean {
+        return true
+    }
 }

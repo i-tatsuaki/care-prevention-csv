@@ -68,117 +68,172 @@
                             <td style="width: 300px" width="200px">
                                 <font th:text=${item.insureNumber.content}></font>
                                 <div th:unless="${item.insureNumber.error}">
-                                    <i class="fas fa-exclamation-triangle error-icon" href="#" title="エラー内容" data-toggle="popover" data-trigger="hover" th:data-content=${item.insureNumber.formatErrorMessage}></i>
+                                    <span data-toggle="popover" data-trigger="hover" th:data-content=${item.insureNumber.formatErrorMessage}>
+                                        <i class="fas fa-exclamation-triangle error-icon"></i>
+                                    </span>
                                 </div>
                             </td>
 
                             <td>
                                 <font th:text=${item.serviceKindCode.content}></font>
                                 <div th:unless="${item.serviceKindCode.error}">
-                                    <i class="fas fa-exclamation-triangle error-icon" href="#" title="エラー内容" data-toggle="popover" data-trigger="hover" th:data-content=${item.serviceKindCode.formatErrorMessage}></i>
+                                    <span data-toggle="popover" data-trigger="hover" th:data-content=${item.serviceKindCode.formatErrorMessage}>
+                                        <i class="fas fa-exclamation-triangle error-icon"></i>
+                                    </span>
                                 </div>
                             </td>
 
                             <td>
-                                <font th:text=${item.serviceCode}></font>
-                                <br>
-                                <font color="red" th:text=${item.serviceCodeFormatErrorMessage}></font>
+                                <font th:text=${item.serviceCode.content}></font>
+                                <div th:unless="${item.serviceCode.error}">
+                                    <span data-toggle="popover" data-trigger="hover" th:data-content=${item.serviceCode.formatErrorMessage}>
+                                        <i class="fas fa-exclamation-triangle error-icon"></i>
+                                    </span>
+                                </div>
                             </td>
 
                             <td>
-                                <font th:text=${item.startDate}></font>
-                                <br>
-                                <font color="red" th:text=${item.startDateFormatErrorMessage}></font>
+                                <font th:text=${item.startDate.content}></font>
+                                <div th:unless="${item.startDate.error}">
+                                    <span data-toggle="popover" data-trigger="hover" th:data-content=${item.startDate.formatErrorMessage}>
+                                        <i class="fas fa-exclamation-triangle error-icon"></i>
+                                    </span>
+                                </div>
                             </td>
 
                             <td>
-                                <font th:text=${item.endDate}></font>
-                                <br>
-                                <font color="red" th:text=${item.endDateFormatErrorMessage}></font>
+                                <font th:text=${item.endDate.content}></font>
+                                <div th:unless="${item.endDate.error}">
+                                    <span data-toggle="popover" data-trigger="hover" th:data-content=${item.endDate.formatErrorMessage}>
+                                        <i class="fas fa-exclamation-triangle error-icon"></i>
+                                    </span>
+                                </div>
                             </td>
 
                             <td>
-                                <font th:text=${item.serviceName}></font>
-                                <br>
-                                <font color="red" th:text=${item.serviceNameFormatErrorMessage}></font>
+                                <font th:text=${item.serviceName.content}></font>
+                                <div th:unless="${item.serviceName.error}">
+                                    <span data-toggle="popover" data-trigger="hover" th:data-content=${item.serviceName.formatErrorMessage}>
+                                        <i class="fas fa-exclamation-triangle error-icon"></i>
+                                    </span>
+                                </div>
                             </td>
 
                             <td>
-                                <font th:text=${item.unitNumber}></font>
-                                <br>
-                                <font color="red" th:text=${item.unitNumberFormatErrorMessage}></font>
+                                <font th:text=${item.unitNumber.content}></font>
+                                <div th:unless="${item.unitNumber.error}">
+                                    <span data-toggle="popover" data-trigger="hover" th:data-content=${item.unitNumber.formatErrorMessage}>
+                                        <i class="fas fa-exclamation-triangle error-icon"></i>
+                                    </span>
+                                </div>
                             </td>
 
                             <td>
-                                <font th:text=${item.countUnit}></font>
-                                <br>
-                                <font color="red" th:text=${item.countUnitFormatErrorMessage}></font>
+                                <font th:text=${item.countUnit.content}></font>
+                                <div th:unless="${item.countUnit.error}">
+                                    <span data-toggle="popover" data-trigger="hover" th:data-content=${item.countUnit.formatErrorMessage}>
+                                        <i class="fas fa-exclamation-triangle error-icon"></i>
+                                    </span>
+                                </div>
                             </td>
 
                             <td>
-                                <font th:text=${item.limitCount}></font>
-                                <br>
-                                <font color="red" th:text=${item.limitCountFormatErrorMessage}></font>
+                                <font th:text=${item.limitCount.content}></font>
+                                <div th:unless="${item.limitCount.error}">
+                                    <span data-toggle="popover" data-trigger="hover" th:data-content=${item.limitCount.formatErrorMessage}>
+                                        <i class="fas fa-exclamation-triangle error-icon"></i>
+                                    </span>
+                                </div>
                             </td>
 
                             <td>
-                                <font th:text=${item.termLimitCount}></font>
-                                <br>
-                                <font color="red" th:text=${item.termLimitCountFormatErrorMessage}></font>
+                                <font th:text=${item.termLimitCount.content}></font>
+                                <div th:unless="${item.termLimitCount.error}">
+                                    <span data-toggle="popover" data-trigger="hover" th:data-content=${item.termLimitCount.formatErrorMessage}>
+                                        <i class="fas fa-exclamation-triangle error-icon"></i>
+                                    </span>
+                                </div>
                             </td>
 
                             <td>
-                                <font th:text=${item.paymentLimitDivision}></font>
-                                <br>
-                                <font color="red" th:text=${item.paymentLimitDivisionFormatErrorMessage}></font>
+                                <font th:text=${item.paymentLimitDivision.content}></font>
+                                <div th:unless="${item.paymentLimitDivision.error}">
+                                    <span data-toggle="popover" data-trigger="hover" th:data-content=${item.paymentLimitDivision.formatErrorMessage}>
+                                        <i class="fas fa-exclamation-triangle error-icon"></i>
+                                    </span>
+                                </div>
                             </td>
 
                             <td>
-                                <font th:text=${item.spareColumn}></font>
-                                <br>
-                                <font color="red" th:text=${item.spareColumnFormatErrorMessage}></font>
+                                <font th:text=${item.spareColumn.content}></font>
+                                <div th:unless="${item.spareColumn.error}">
+                                    <span data-toggle="popover" data-trigger="hover" th:data-content=${item.spareColumn.formatErrorMessage}>
+                                        <i class="fas fa-exclamation-triangle error-icon"></i>
+                                    </span>
+                                </div>
                             </td>
 
                             <td>
-                                <font th:text=${item.paymentRate}></font>
-                                <br>
-                                <font color="red" th:text=${item.paymentRateFormatErrorMessage}></font>
+                                <font th:text=${item.paymentRate.content}></font>
+                                <div th:unless="${item.paymentRate.error}">
+                                    <span data-toggle="popover" data-trigger="hover" th:data-content=${item.paymentRate.formatErrorMessage}>
+                                        <i class="fas fa-exclamation-triangle error-icon"></i>
+                                    </span>
+                                </div>
                             </td>
 
                             <td>
-                                <font th:text=${item.insuredPayment}></font>
-                                <br>
-                                <font color="red" th:text=${item.insuredPaymentFormatErrorMessage}></font>
+                                <font th:text=${item.insuredPayment.content}></font>
+                                <div th:unless="${item.insuredPayment.error}">
+                                    <span data-toggle="popover" data-trigger="hover" th:data-content=${item.insuredPayment.formatErrorMessage}>
+                                        <i class="fas fa-exclamation-triangle error-icon"></i>
+                                    </span>
+                                </div>
                             </td>
 
                             <td>
-                                <font th:text=${item.implementationDivisionForTarget}></font>
-                                <br>
-                                <font color="red" th:text=${item.implementationDivisionForTargetFormatErrorMessage}></font>
+                                <font th:text=${item.implementationDivisionForTarget.content}></font>
+                                <div th:unless="${item.implementationDivisionForTarget.error}">
+                                    <span data-toggle="popover" data-trigger="hover" th:data-content=${item.implementationDivisionForTarget.formatErrorMessage}>
+                                        <i class="fas fa-exclamation-triangle error-icon"></i>
+                                    </span>
+                                </div>
                             </td>
 
                             <td>
-                                <font th:text=${item.implementationDivisionForSupportNeed1}></font>
-                                <br>
-                                <font color="red" th:text=${item.implementationDivisionForSupportNeed1FormatErrorMessage}></font>
+                                <font th:text=${item.implementationDivisionForSupportNeed1.content}></font>
+                                <div th:unless="${item.implementationDivisionForSupportNeed1.error}">
+                                    <span data-toggle="popover" data-trigger="hover" th:data-content=${item.implementationDivisionForSupportNeed1.formatErrorMessage}>
+                                        <i class="fas fa-exclamation-triangle error-icon"></i>
+                                    </span>
+                                </div>
                             </td>
 
                             <td>
-                                <font th:text=${item.implementationDivisionForSupportNeed2}></font>
-                                <br>
-                                <font color="red" th:text=${item.implementationDivisionForSupportNeed2FormatErrorMessage}></font>
+                                <font th:text=${item.implementationDivisionForSupportNeed2.content}></font>
+                                <div th:unless="${item.implementationDivisionForSupportNeed2.error}">
+                                    <span data-toggle="popover" data-trigger="hover" th:data-content=${item.implementationDivisionForSupportNeed2.formatErrorMessage}>
+                                        <i class="fas fa-exclamation-triangle error-icon"></i>
+                                    </span>
+                                </div>
                             </td>
 
                             <td>
-                                <font th:text=${item.consignmentDivisionInsuranceAssociation}></font>
-                                <br>
-                                <font color="red" th:text=${item.consignmentDivisionInsuranceAssociationFormatErrorMessage}></font>
+                                <font th:text=${item.consignmentDivisionInsuranceAssociation.content}></font>
+                                <div th:unless="${item.consignmentDivisionInsuranceAssociation.error}">
+                                    <span data-toggle="popover" data-trigger="hover" th:data-content=${item.consignmentDivisionInsuranceAssociation.formatErrorMessage}>
+                                        <i class="fas fa-exclamation-triangle error-icon"></i>
+                                    </span>
+                                </div>
                             </td>
 
                             <td>
-                                <font th:text=${item.createdDate}></font>
-                                <br>
-                                <font color="red" th:text=${item.createdDateFormatErrorMessage}></font>
+                                <font th:text=${item.createdDate.content}></font>
+                                <div th:unless="${item.createdDate.error}">
+                                    <span data-toggle="popover" data-trigger="hover" th:data-content=${item.createdDate.formatErrorMessage}>
+                                        <i class="fas fa-exclamation-triangle error-icon"></i>
+                                    </span>
+                                </div>
                             </td>
                         </div>
 

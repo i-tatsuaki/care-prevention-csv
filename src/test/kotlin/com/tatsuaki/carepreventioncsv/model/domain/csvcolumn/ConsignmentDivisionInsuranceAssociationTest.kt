@@ -28,6 +28,6 @@ class ConsignmentDivisionInsuranceAssociationCodeTest {
 
         // then
         assertThat(target.description).isEqualTo(expectedConsignmentDivisionInsuranceAssociation)
-        assertThat(target.formatErrorMessage).isEqualTo(expectedFormatErrorMessage)
+        assertThat(target.getFormatErrorMessage()).isEqualTo(expectedFormatErrorMessage)
     }
 }
