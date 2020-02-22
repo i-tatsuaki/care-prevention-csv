@@ -123,6 +123,30 @@ class CarePreventionCsvItem private constructor(columns: Array<String>) {
         }
     }
 
+    fun getColumns(): List<CsvColumn?> {
+        return mutableListOf(
+                insureNumber,
+                serviceKindCode,
+                serviceCode,
+                startDate,
+                endDate,
+                serviceName,
+                unitNumber,
+                countUnit,
+                limitCount,
+                termLimitCount,
+                paymentLimitDivision,
+                spareColumn,
+                paymentRate,
+                insuredPayment,
+                implementationDivisionForTarget,
+                implementationDivisionForSupportNeed1,
+                implementationDivisionForSupportNeed2,
+                consignmentDivisionInsuranceAssociation,
+                createdDate
+        )
+    }
+
     override fun equals(other: Any?): Boolean {
 
         // TODO 実装する
