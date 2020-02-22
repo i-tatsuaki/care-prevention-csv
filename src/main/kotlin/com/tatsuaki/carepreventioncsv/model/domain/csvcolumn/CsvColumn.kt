@@ -1,6 +1,10 @@
 package com.tatsuaki.carepreventioncsv.model.domain.csvcolumn
 
+import java.util.regex.Pattern
+
 abstract class CsvColumn(val content: String) {
+
+    open val regex: String = ".*"
 
     val isError: Boolean
         get() {
@@ -13,7 +17,11 @@ abstract class CsvColumn(val content: String) {
 
     abstract fun getFormatContent(): String
     abstract fun getFormatErrorMessage(): String
-    abstract fun validateCharacter(): Boolean
+    fun validateCharacter(): Boolean {
+        val p = Pattern.compile(regex)
+        val m = p.matcher(content)
+        return m.matches()
+    }
     abstract fun validateLength(): Boolean
     abstract fun validateCodeFormat(): Boolean
 }

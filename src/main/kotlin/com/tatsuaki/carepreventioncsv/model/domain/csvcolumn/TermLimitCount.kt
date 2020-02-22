@@ -63,10 +63,6 @@ class TermLimitCount(termLimitCount: String) : CsvColumn(termLimitCount) {
         return content.isEmpty() || TermLimitCount.Code.contains(content)
     }
 
-    override fun validateCharacter(): Boolean {
-        return true
-    }
-
     override fun validateLength(): Boolean {
         return true
     }

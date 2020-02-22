@@ -11,10 +11,6 @@ class SpareColumn(spareColumn: String) : CsvColumn(spareColumn) {
         return content
     }
 
-    override fun validateCharacter(): Boolean {
-        return true
-    }
-
     override fun validateLength(): Boolean {
         return true
     }

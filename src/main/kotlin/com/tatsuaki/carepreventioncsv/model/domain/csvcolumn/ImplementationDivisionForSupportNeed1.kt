@@ -63,10 +63,6 @@ class ImplementationDivisionForSupportNeed1(implementationDivisionForSupportNeed
         return ImplementationDivisionForSupportNeed1.Code.contains(content)
     }
 
-    override fun validateCharacter(): Boolean {
-        return true
-    }
-
     override fun validateLength(): Boolean {
         return true
     }

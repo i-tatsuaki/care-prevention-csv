@@ -62,10 +62,6 @@ class ImplementationDivisionForTarget(implementationDivisionForTarget: String) :
         return ImplementationDivisionForTarget.Code.contains(content)
     }
 
-    override fun validateCharacter(): Boolean {
-        return true
-    }
-
     override fun validateLength(): Boolean {
         return true
     }

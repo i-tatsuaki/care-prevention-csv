@@ -40,9 +40,6 @@ class ServiceKindCode(serviceKindCode: String) : CsvColumn(serviceKindCode) {
             return false
         }
     }
-    override fun validateCharacter(): Boolean {
-        return true
-    }
 
     override fun validateLength(): Boolean {
         return true

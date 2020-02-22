@@ -64,10 +64,6 @@ class CountUnit(countUnit: String) : CsvColumn(countUnit) {
         return Code.contains(content)
     }
 
-    override fun validateCharacter(): Boolean {
-        return true
-    }
-
     override fun validateLength(): Boolean {
         return true
     }

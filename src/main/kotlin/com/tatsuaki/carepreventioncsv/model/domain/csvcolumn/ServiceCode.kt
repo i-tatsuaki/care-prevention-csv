@@ -4,6 +4,8 @@ import java.util.regex.Pattern
 
 class ServiceCode(serviceCode: String) : CsvColumn(serviceCode) {
 
+    override val regex = "[0-9a-zA-Z]*"
+
     override fun getFormatErrorMessage(): String {
         val errorMessageBuilder = StringBuilder()
 
@@ -20,13 +22,6 @@ class ServiceCode(serviceCode: String) : CsvColumn(serviceCode) {
 
     override fun getFormatContent(): String {
         return content
-    }
-
-    override fun validateCharacter(): Boolean {
-        val regex = "[0-9a-zA-Z]*"
-        val p = Pattern.compile(regex)
-        val m = p.matcher(content)
-        return m.matches()
     }
 
     override fun validateLength(): Boolean {

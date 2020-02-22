@@ -67,10 +67,6 @@ class ConsignmentDivisionInsuranceAssociation(consignmentDivisionInsuranceAssoci
         return Code.contains(content)
     }
 
-    override fun validateCharacter(): Boolean {
-        return true
-    }
-
     override fun validateLength(): Boolean {
         return true
     }

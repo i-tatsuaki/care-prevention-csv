@@ -61,10 +61,6 @@ class PaymentLimitDivision(paymentLimitDivision: String) : CsvColumn(paymentLimi
         return content.isEmpty() || PaymentLimitDivision.Code.contains(content)
     }
 
-    override fun validateCharacter(): Boolean {
-        return true
-    }
-
     override fun validateLength(): Boolean {
         return true
     }

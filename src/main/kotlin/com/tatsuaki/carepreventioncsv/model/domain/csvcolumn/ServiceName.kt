@@ -20,10 +20,6 @@ class ServiceName(serviceName: String) : CsvColumn(serviceName) {
         return content.length <= LENGTH
     }
 
-    override fun validateCharacter(): Boolean {
-        return true
-    }
-
     override fun validateCodeFormat(): Boolean {
         return true
     }
