@@ -66,17 +66,17 @@
                         <div th:unless="${item.error}">
 
                             <td style="width: 300px" width="200px">
+                                <font th:text=${item.insureNumber.content}></font>
                                 <div th:unless="${item.insureNumber.error}">
                                     <i class="fas fa-exclamation-triangle error-icon" href="#" title="エラー内容" data-toggle="popover" data-trigger="hover" th:data-content=${item.insureNumber.formatErrorMessage}></i>
                                 </div>
-                                <font th:text=${item.insureNumber.content}></font>
                             </td>
 
                             <td>
+                                <font th:text=${item.serviceKindCode.content}></font>
                                 <div th:unless="${item.serviceKindCode.error}">
                                     <i class="fas fa-exclamation-triangle error-icon" href="#" title="エラー内容" data-toggle="popover" data-trigger="hover" th:data-content=${item.serviceKindCode.formatErrorMessage}></i>
                                 </div>
-                                <font th:text=${item.serviceKindCode.content}></font>
                             </td>
 
                             <td>
